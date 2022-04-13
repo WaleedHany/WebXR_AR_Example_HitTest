@@ -95,10 +95,10 @@ class App{
             {
                 if (ev.initialise !== undefined)
                 {
-                    self.startQuaternion = self.chair.object.quaternion.clone();
+                    self.startQuaternion = self.chair.quaternion.clone();
                 }else{
-                    self.chair.object.quaternion.copy( self.startQuaternion );
-                    self.chair.object.rotateY( ev.theta );
+                    self.chair.quaternion.copy( self.startQuaternion );
+                    self.chair.rotateY( ev.theta );
                 }
             }       
         });

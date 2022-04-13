@@ -85,6 +85,8 @@ class App{
             }
         }
 
+        this.controller = this.renderer.xr.getController( 0 );
+        this.controller.addEventListener( 'select', onSelect );
         // add rotate event
         this.controller.addEventListener( 'rotate', (ev)=>{
             if(self.chair!==undefined)
@@ -98,10 +100,6 @@ class App{
                 }
             }       
         });
-
-        this.controller = this.renderer.xr.getController( 0 );
-        this.controller.addEventListener( 'select', onSelect );
-        
         this.scene.add( this.controller );
     }
 	

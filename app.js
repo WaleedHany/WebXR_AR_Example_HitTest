@@ -48,13 +48,11 @@ class App{
         
 	}
     
-    setupXR()
-    {
+    setupXR(){
         this.renderer.xr.enabled = true;
         
         // 1: If navigator includes xr and immersive-ar is supported then show the ar-button class
-        if ( 'xr' in navigator )
-        {
+        if ( 'xr' in navigator ) {
 
 			navigator.xr.isSessionSupported( 'immersive-ar' ).then( ( supported ) => 
             {
@@ -89,7 +87,7 @@ class App{
         }
 
         this.controller = this.renderer.xr.getController( 0 );
-        this.gestures.addEventListener( 'tap', onSelect );
+        this.controller.addEventListener( 'select', onSelect );
         // add rotate event
         this.gestures.addEventListener( 'rotate', (ev)=>{
             if (self.chair===undefined) return;
@@ -120,7 +118,7 @@ class App{
         
         const self = this;
         
-        loader.load( '../../assets/hdr/venice_sunset_1k.hdr', ( texture ) => {
+        loader.load( './assets/hdr/venice_sunset_1k.hdr', ( texture ) => {
           const envMap = pmremGenerator.fromEquirectangular( texture ).texture;
           pmremGenerator.dispose();
 
@@ -254,7 +252,7 @@ class App{
             if ( this.renderer.xr.isPresenting ){
                 this.gestures.update();
             }   
-            //if ( this.chair !== undefined ) this.chair.update(dt); 
+            if ( this.chair !== undefined ) this.chair.update(dt); 
         }
 
         this.renderer.render( this.scene, this.camera );

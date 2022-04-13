@@ -1,12 +1,12 @@
-import * as THREE from '../../libs/three/three.module.js';
-import { OrbitControls } from '../../libs/three/jsm/OrbitControls.js';
-import { GLTFLoader } from '../../libs/three/jsm/GLTFLoader.js';
-import { Stats } from '../../libs/stats.module.js';
-import { CanvasUI } from '../../libs/CanvasUI.js'
-import { ARButton } from '../../libs/ARButton.js';
-import { LoadingBar } from '../../libs/LoadingBar.js';
-import { Player } from '../../libs/Player.js';
-import { ControllerGestures } from '../../libs/ControllerGestures.js';
+import * as THREE from './libs/three/three.module.js';
+import { OrbitControls } from './libs/three/jsm/OrbitControls.js';
+import { GLTFLoader } from './libs/three/jsm/GLTFLoader.js';
+import { Stats } from './libs/stats.module.js';
+import { CanvasUI } from './libs/CanvasUI.js'
+import { ARButton } from './libs/ARButton.js';
+import { LoadingBar } from './libs/LoadingBar.js';
+import { Player } from './libs/Player.js';
+import { ControllerGestures } from './libs/ControllerGestures.js';
 
 class App{
 	constructor(){
@@ -54,7 +54,7 @@ class App{
     initScene(){
         this.loadingBar = new LoadingBar();
         
-        this.assetsPath = '../../assets/';
+        this.assetsPath = './assets/';
         const loader = new GLTFLoader().setPath(this.assetsPath);
 		const self = this;
 		

@@ -3,6 +3,7 @@ import { GLTFLoader } from './libs/three/jsm/GLTFLoader.js';
 import { RGBELoader } from './libs/three/jsm/RGBELoader.js';
 import { ARButton } from './libs/ARButton.js';
 import { LoadingBar } from './libs/LoadingBar.js';
+import { ControllerGestures } from './libs/ControllerGestures.js';
 
 class App{
 	constructor()
@@ -70,8 +71,11 @@ class App{
         // hit test
         this.hitTestSourceRequested = false;
         this.hitTestSource = null;
-        
-        // triggered on screen tuch
+
+        // define controller gestures
+        this.gestures = new ControllerGestures( this.renderer );
+
+        // triggered on screen touch
         function onSelect() {
             if (self.chair===undefined) return;
             
@@ -80,6 +84,20 @@ class App{
                 self.chair.visible = true;
             }
         }
+
+        // add rotate event
+        this.gestures.addEventListener( 'rotate', (ev)=>{
+            if(self.chair!==undefined)
+            {
+                if (ev.initialise !== undefined)
+                {
+                    self.startQuaternion = self.chair.object.quaternion.clone();
+                }else{
+                    self.chair.object.quaternion.copy( self.startQuaternion );
+                    self.chair.object.rotateY( ev.theta );
+                }
+            }       
+        });
 
         this.controller = this.renderer.xr.getController( 0 );
         this.controller.addEventListener( 'select', onSelect );
@@ -231,6 +249,9 @@ class App{
             if ( this.hitTestSourceRequested === false ) this.requestHitTestSource( )
 
             if ( this.hitTestSource ) this.getHitTestResults( frame );
+            if ( this.renderer.xr.isPresenting ){
+                this.gestures.update();
+            }
         }
 
         this.renderer.render( this.scene, this.camera );

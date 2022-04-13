@@ -48,11 +48,13 @@ class App{
         
 	}
     
-    setupXR(){
+    setupXR()
+    {
         this.renderer.xr.enabled = true;
         
         // 1: If navigator includes xr and immersive-ar is supported then show the ar-button class
-        if ( 'xr' in navigator ) {
+        if ( 'xr' in navigator )
+        {
 
 			navigator.xr.isSessionSupported( 'immersive-ar' ).then( ( supported ) => 
             {
@@ -252,7 +254,7 @@ class App{
             if ( this.renderer.xr.isPresenting ){
                 this.gestures.update();
             }   
-            if ( this.chair !== undefined ) this.chair.update(dt); 
+            //if ( this.chair !== undefined ) this.chair.update(dt); 
         }
 
         this.renderer.render( this.scene, this.camera );

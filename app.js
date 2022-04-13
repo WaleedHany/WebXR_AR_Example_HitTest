@@ -10,6 +10,7 @@ class App{
     {
 		const container = document.createElement( 'div' );
 		document.body.appendChild( container );
+        this.clock = new THREE.Clock();
         
         this.loadingBar = new LoadingBar();
         this.loadingBar.visible = false;
@@ -243,14 +244,15 @@ class App{
     }
     
 	render( timestamp, frame ) {
-
+        const dt = this.clock.getDelta();
         if ( frame ) {
             if ( this.hitTestSourceRequested === false ) this.requestHitTestSource( )
 
             if ( this.hitTestSource ) this.getHitTestResults( frame );
             if ( this.renderer.xr.isPresenting ){
                 this.gestures.update();
-            }    
+            }   
+            if ( this.chair !== undefined ) this.chair.update(dt); 
         }
 
         this.renderer.render( this.scene, this.camera );

@@ -86,7 +86,7 @@ class App{
         }
 
         // add rotate event
-        this.gestures.addEventListener( 'rotate', (ev)=>{
+        this.controller.addEventListener( 'rotate', (ev)=>{
             if(self.chair!==undefined)
             {
                 if (ev.initialise !== undefined)

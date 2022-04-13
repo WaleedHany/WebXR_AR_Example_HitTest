@@ -252,7 +252,6 @@ class App{
             if ( this.renderer.xr.isPresenting ){
                 this.gestures.update();
             }   
-            if ( this.chair !== undefined ) this.chair.update(dt); 
         }
 
         this.renderer.render( this.scene, this.camera );

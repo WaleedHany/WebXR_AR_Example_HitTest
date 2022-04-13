@@ -88,7 +88,7 @@ class App{
         this.controller = this.renderer.xr.getController( 0 );
         this.controller.addEventListener( 'select', onSelect );
         // add rotate event
-        this.controller.addEventListener( 'rotate', (ev)=>{
+        this.gestures.addEventListener( 'rotate', (ev)=>{
             if(self.chair!==undefined)
             {
                 if (ev.initialise !== undefined)
@@ -247,11 +247,11 @@ class App{
             if ( this.hitTestSourceRequested === false ) this.requestHitTestSource( )
 
             if ( this.hitTestSource ) this.getHitTestResults( frame );
-            if ( this.renderer.xr.isPresenting ){
-                this.gestures.update();
-            }
         }
-
+        if ( this.renderer.xr.isPresenting ){
+            this.gestures.update();
+        }
+        
         this.renderer.render( this.scene, this.camera );
 
     }

@@ -183,7 +183,8 @@ class App {
         let currentSession = null
         const self = this
         const sessionInit = {
-            requiredFeatures: ['hit-test', 'depth-sensing'],
+            requiredFeatures: ['hit-test'],
+            optionalFeatures: ['depth-sensing'],
             depthSensing: {
                 usagePreference: ["cpu-optimized", "gpu-optimized"],
                 formatPreference: ["luminance-alpha", "float32"]

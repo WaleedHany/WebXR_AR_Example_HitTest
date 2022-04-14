@@ -267,12 +267,16 @@ class App {
             const pose = frame.getViewerPose(referenceSpace);
             if (pose) {
                 for (const view of pose.views) {
-                const depthInformation = frame.getDepthInformation(view);
-                if (depthInformation) {
-                    useCpuDepthInformation(view, depthInformation);
-      }
-    }
-  }
+                    console.log(pose)
+                    console.log(frame)
+                    if (typeof frame.getDepthInformation == 'function') {
+                        const depthInformation = frame.getDepthInformation(view);
+                        if (depthInformation) {
+                            useCpuDepthInformation(view, depthInformation);
+                        }
+                    }
+                }
+            }
         }
 
         this.renderer.render(this.scene, this.camera);

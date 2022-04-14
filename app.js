@@ -209,7 +209,6 @@ class App {
         }
         // request an immersive-ar session
         navigator.xr.requestSession('immersive-ar', sessionInit).then(onSessionStarted)
-        console.log(session.depthDataFormat);
     }
 
     requestHitTestSource() {

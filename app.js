@@ -110,10 +110,9 @@ class App {
         }
 
         this.controller = this.renderer.xr.getController(0);
-        console.log(this.controller)
-        console.log(this.renderer.xr.getController(0))
+
         this.controller.addEventListener('select', onSelect);
-        document.getElementById('arControls').addEventListener('rotate', onRotate)
+        document.body.addEventListener('rotate', onRotate)
         // add rotate event
         this.gestures.addEventListener('rotate', (ev) => {
             if (self.chair === undefined) return;

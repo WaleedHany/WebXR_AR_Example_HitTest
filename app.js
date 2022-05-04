@@ -115,7 +115,7 @@ class App {
         this.controller.addEventListener('select', onSelect);
         document.getElementById('arControls').addEventListener('rotate', onRotate)
         document.getElementById('arControls').style.opacity=1
-        document.getElementById('arControls').style.color=red
+        document.getElementById('arControls').style.color='red'
         // add rotate event
         this.gestures.addEventListener('rotate', (ev) => {
             if (self.chair === undefined) return;

@@ -202,8 +202,8 @@ class App {
         const self = this
         const sessionInit = {
             requiredFeatures: ['hit-test'],
-            optionalFeatures: [ 'dom-overlay' ],
-	        domOverlay: { root: document.getElementById('arControls') } 
+            // optionalFeatures: [ 'dom-overlay' ],
+	        // domOverlay: { root: document.getElementById('arControls') } 
             // optionalFeatures: ['depth-sensing'],
             // depthSensing: {
             //     usagePreference: ["cpu-optimized", "gpu-optimized"],

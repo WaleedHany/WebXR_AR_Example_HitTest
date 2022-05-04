@@ -96,26 +96,8 @@ class App {
             }
         }
 
-        function onRotate(ev)
-        {
-            if (self.chair === undefined) return;
-            if (self.chair !== undefined) {
-                if (ev.initialise !== undefined) {
-                    self.startQuaternion = self.chair.quaternion.clone();
-                } else {
-                    self.chair.quaternion.copy(self.startQuaternion);
-                    self.chair.rotateY(ev.theta);
-                }
-            }
-        }
-
         this.controller = this.renderer.xr.getController(0);
-        // console.log(this.controller)
-        // console.log(this.renderer.xr.getController(0))
         this.controller.addEventListener('select', onSelect);
-        document.getElementById('arControls').addEventListener('rotate', onRotate)
-        document.getElementById('arControls').style.opacity=1
-        document.getElementById('arControls').style.color='red'
         // add rotate event
         this.gestures.addEventListener('rotate', (ev) => {
             if (self.chair === undefined) return;
@@ -203,14 +185,14 @@ class App {
         let currentSession = null
         const self = this
         const sessionInit = {
-            requiredFeatures: ['hit-test'],
-            optionalFeatures: [ 'dom-overlay' ],
-	        domOverlay: { root: document.getElementById('arControls') } 
+            requiredFeatures: ['hit-test']
+        
             // optionalFeatures: ['depth-sensing'],
             // depthSensing: {
             //     usagePreference: ["cpu-optimized", "gpu-optimized"],
             //     formatPreference: ["luminance-alpha", "float32"]
             // }
+            
         }
         // 
         function onSessionStarted(session) {

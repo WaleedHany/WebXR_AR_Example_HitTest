@@ -110,9 +110,10 @@ class App {
         }
 
         this.controller = this.renderer.xr.getController(0);
-
+        console.log(this.controller)
+        console.log(this.renderer.xr.getController(0))
         this.controller.addEventListener('select', onSelect);
-        document.body.addEventListener('rotate', onRotate)
+        this.controller.addEventListener('rotate', onRotate)
         // add rotate event
         this.gestures.addEventListener('rotate', (ev) => {
             if (self.chair === undefined) return;
@@ -201,8 +202,8 @@ class App {
         const self = this
         const sessionInit = {
             requiredFeatures: ['hit-test'],
-            // optionalFeatures: [ 'dom-overlay' ],
-	        // domOverlay: { root: document.getElementById('arControls') } 
+            optionalFeatures: [ 'dom-overlay', 'dom-overlay-for-handheld-ar' ],
+	        domOverlay: { root: document.getElementById('arControls') } 
             // optionalFeatures: ['depth-sensing'],
             // depthSensing: {
             //     usagePreference: ["cpu-optimized", "gpu-optimized"],

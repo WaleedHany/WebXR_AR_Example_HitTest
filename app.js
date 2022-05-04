@@ -202,7 +202,7 @@ class App {
         const self = this
         const sessionInit = {
             requiredFeatures: ['hit-test'],
-            optionalFeatures: [ 'dom-overlay', 'dom-overlay-for-handheld-ar' ],
+            optionalFeatures: [ 'dom-overlay' ],
 	        domOverlay: { root: document.getElementById('arControls') } 
             // optionalFeatures: ['depth-sensing'],
             // depthSensing: {

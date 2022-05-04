@@ -96,8 +96,24 @@ class App {
             }
         }
 
+        function onRotate(ev)
+        {
+            if (self.chair === undefined) return;
+            if (self.chair !== undefined) {
+                if (ev.initialise !== undefined) {
+                    self.startQuaternion = self.chair.quaternion.clone();
+                } else {
+                    self.chair.quaternion.copy(self.startQuaternion);
+                    self.chair.rotateY(ev.theta);
+                }
+            }
+        }
+
         this.controller = this.renderer.xr.getController(0);
+        console.log(this.controller)
+        console.log(this.renderer.xr.getController(0))
         this.controller.addEventListener('select', onSelect);
+        this.controller.addEventListener('rotate', onRotate)
         // add rotate event
         this.gestures.addEventListener('rotate', (ev) => {
             if (self.chair === undefined) return;
@@ -110,6 +126,8 @@ class App {
                 }
             }
         });
+
+
         this.scene.add(this.controller);
     }
 
@@ -184,11 +202,13 @@ class App {
         const self = this
         const sessionInit = {
             requiredFeatures: ['hit-test'],
-            optionalFeatures: ['depth-sensing'],
-            depthSensing: {
-                usagePreference: ["cpu-optimized", "gpu-optimized"],
-                formatPreference: ["luminance-alpha", "float32"]
-            }
+            optionalFeatures: [ 'dom-overlay', 'dom-overlay-for-handheld-ar' ],
+	        domOverlay: { root: document.body } 
+            // optionalFeatures: ['depth-sensing'],
+            // depthSensing: {
+            //     usagePreference: ["cpu-optimized", "gpu-optimized"],
+            //     formatPreference: ["luminance-alpha", "float32"]
+            // }
         }
 
         function onSessionStarted(session) {
@@ -264,21 +284,19 @@ class App {
                 this.gestures.update();
             }
 
-            const pose = frame.getViewerPose(referenceSpace);
-            if (pose) {
-                for (const view of pose.views) {
-                    if (typeof frame.getDepthInformation == 'function') {
-                        const depthInformation = frame.getDepthInformation(view);
-                        if (depthInformation) {
-                            useCpuDepthInformation(view, depthInformation);
-                        }
-                    }
-                }
-            }
+            // const pose = frame.getViewerPose(referenceSpace);
+            // if (pose) {
+            //     for (const view of pose.views) {
+            //         if (typeof frame.getDepthInformation == 'function') {
+            //             const depthInformation = frame.getDepthInformation(view);
+            //             if (depthInformation) {
+            //                 useCpuDepthInformation(view, depthInformation);
+            //             }
+            //         }
+            //     }
+            // }
         }
-
         this.renderer.render(this.scene, this.camera);
-
     }
 }
 
